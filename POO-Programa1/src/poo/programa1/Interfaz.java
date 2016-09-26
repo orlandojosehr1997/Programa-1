@@ -6,11 +6,14 @@
 package poo.programa1;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Orlando José Hidalgo Ramírez - 2016106829
+ * @author Alejandro Tapia Barboza - 2016167784
+ * @author Francisco Loaiza Vallejos - 2016123417
  */
 public class Interfaz extends javax.swing.JFrame {
 
@@ -42,10 +45,32 @@ public class Interfaz extends javax.swing.JFrame {
                                   sismoTemporal.getProvinciaStr(),
                                   sismoTemporal.getDescripcion(),
                                   sismoTemporal.getLatitud(),
-                                  sismoTemporal.getLongitud(),
-                                  "-"});
+                                  sismoTemporal.getLongitud()});
             TablaSismos.setModel(model);
-            ReadExcelDemo.crearArchivo();
+        }
+        Excel.crearArchivo();
+    }
+    public void updateFechaSismoExistenteBox()
+    {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(Listas.getFechas());
+        FechaSismoExistente.setModel(model);
+    }
+    public void updateSismosInfoMapa()
+    {
+        String fecha = (String)FechaSismoMapa.getSelectedItem();
+        for (Sismo sismo : Listas.getListaSismos()) 
+        {
+            if (sismo.getFecha2().compareTo(fecha)==0)
+            {
+                MagnitudMapa.setText(sismo.getMagnitud());
+                ProfundidadMapa.setText(sismo.getProfundidad());
+                ValorMagMapa.setText(sismo.getValorMagnitud());
+                OrigenMapa.setText(sismo.getOrigenStr());
+                ProvinciaMapa.setText(sismo.getProvinciaStr());
+                DescripcionMapa.setText(sismo.getDescripcion());
+                LatitudMapa.setText(sismo.getLatitud());
+                LongitudMapa.setText(sismo.getLongitud());
+            }
         }
     }
     
@@ -58,6 +83,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel14 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaSismos = new javax.swing.JTable();
@@ -83,7 +109,7 @@ public class Interfaz extends javax.swing.JFrame {
         RegistrarSismo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox(Listas.getFechas());
+        FechaSismoExistente = new javax.swing.JComboBox(Listas.getFechas());
         jLabel9 = new javax.swing.JLabel();
         EditarFecha = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -96,7 +122,7 @@ public class Interfaz extends javax.swing.JFrame {
         EditarProvincia = new javax.swing.JComboBox(Provincia.values());
         jLabel20 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        EditarDetalle = new javax.swing.JTextArea();
+        EditarDescripción = new javax.swing.JTextArea();
         jLabel21 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         EditarLatitud = new javax.swing.JTextField();
@@ -128,6 +154,35 @@ public class Interfaz extends javax.swing.JFrame {
         notificarCelular = new javax.swing.JRadioButton();
         RegistrarUsuario = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        Graficos = new javax.swing.JTabbedPane();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        FechaSismoMapa = new javax.swing.JComboBox(Listas.getFechas());
+        jLabel30 = new javax.swing.JLabel();
+        MagnitudMapa = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        ProfundidadMapa = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        ValorMagMapa = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        OrigenMapa = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        ProvinciaMapa = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        DescripcionMapa = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        LatitudMapa = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        LongitudMapa = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
+        jPanel14.setLayout(new java.awt.GridLayout(1, 2));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -139,11 +194,11 @@ public class Interfaz extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Magnitud", "Profundidad", "Valor Magnitud", "Origen", "Provincia", "Descripcion", "Latitud", "Longitud", "Mapa"
+                "Fecha", "Magnitud", "Profundidad", "Valor Magnitud", "Origen", "Provincia", "Descripcion", "Latitud", "Longitud"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -260,7 +315,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1.setText("Fecha del Sismo a Editar");
         jPanel3.add(jLabel1);
 
-        jPanel3.add(jComboBox1);
+        jPanel3.add(FechaSismoExistente);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Fecha y Hora (Formato: dd/MM/yyyy HH:mm:ss)");
@@ -290,12 +345,12 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel3.add(EditarProvincia);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Detalle");
+        jLabel20.setText("Descripción");
         jPanel3.add(jLabel20);
 
-        EditarDetalle.setColumns(20);
-        EditarDetalle.setRows(5);
-        jScrollPane4.setViewportView(EditarDetalle);
+        EditarDescripción.setColumns(20);
+        EditarDescripción.setRows(5);
+        jScrollPane4.setViewportView(EditarDescripción);
 
         jPanel3.add(jScrollPane4);
 
@@ -310,9 +365,19 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel3.add(jPanel4);
 
         BorrarSismo.setText("Borrar Sismo");
+        BorrarSismo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarSismoActionPerformed(evt);
+            }
+        });
         jPanel3.add(BorrarSismo);
 
         GuardarCambios.setText("Guardar Cambios");
+        GuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarCambiosActionPerformed(evt);
+            }
+        });
         jPanel3.add(GuardarCambios);
 
         jTabbedPane2.addTab("Editar Sismo", jPanel3);
@@ -392,7 +457,82 @@ public class Interfaz extends javax.swing.JFrame {
         jTabbedPane4.addTab("Nuevo Usuario", jPanel1);
 
         jTabbedPane1.addTab("Registrar Usuario", jTabbedPane4);
+
+        jPanel6.setLayout(new java.awt.GridLayout());
+
+        Graficos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GraficosFocusGained(evt);
+            }
+        });
+        Graficos.addTab("# Sismos por Provincia", jPanel8);
+        Graficos.addTab("# Sismos por Tipo de Origen", jPanel9);
+        Graficos.addTab("Sismos en Rango de Fechas", jPanel10);
+        Graficos.addTab("# Sismos por mes en un año", jPanel11);
+        Graficos.addTab("Sismos por Magnitud", jPanel12);
+
+        jPanel6.add(Graficos);
+
         jTabbedPane1.addTab("Gráficos", jPanel6);
+
+        jPanel13.setLayout(new java.awt.GridLayout(10, 2));
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Fecha del Sismo que desea visualizar en el mapa:");
+        jPanel13.add(jLabel22);
+
+        FechaSismoMapa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                FechaSismoMapaItemStateChanged(evt);
+            }
+        });
+        jPanel13.add(FechaSismoMapa);
+
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("Magnitud");
+        jPanel13.add(jLabel30);
+        jPanel13.add(MagnitudMapa);
+
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("Profundidad");
+        jPanel13.add(jLabel24);
+        jPanel13.add(ProfundidadMapa);
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("Valor de Magnitud");
+        jPanel13.add(jLabel26);
+        jPanel13.add(ValorMagMapa);
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("Origen");
+        jPanel13.add(jLabel28);
+        jPanel13.add(OrigenMapa);
+
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Provincia");
+        jPanel13.add(jLabel34);
+        jPanel13.add(ProvinciaMapa);
+
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("Descripcion");
+        jPanel13.add(jLabel33);
+        jPanel13.add(DescripcionMapa);
+
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("Latitud");
+        jPanel13.add(jLabel37);
+        jPanel13.add(LatitudMapa);
+
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("Longitud");
+        jPanel13.add(jLabel31);
+        jPanel13.add(LongitudMapa);
+        jPanel13.add(jPanel15);
+
+        jButton1.setText("Visualizar en Mapa");
+        jPanel13.add(jButton1);
+
+        jTabbedPane1.addTab("Ver en Mapa", jPanel13);
 
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
@@ -447,9 +587,9 @@ public class Interfaz extends javax.swing.JFrame {
         Longitud.setText("");
         Descripcion.setText("");
         
-        Listas listas = new Listas();
         Listas.agregarSismo(s1);
         updateTablaPrincipal();
+        updateFechaSismoExistenteBox();
     }//GEN-LAST:event_RegistrarSismoActionPerformed
 
     private void RegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarUsuarioActionPerformed
@@ -475,10 +615,6 @@ public class Interfaz extends javax.swing.JFrame {
         if (listaProvincias.isEmpty())
             listaProvincias.add(Provincia.Sin_Asignar);
         
-        for (Provincia provincia : listaProvincias) 
-        {
-            System.out.println(provincia.toString());
-        }
         Cliente c1 = new Cliente(NombreUsuario.getText(),
                 Correo.getText(),
                 Celular.getText(),
@@ -487,7 +623,72 @@ public class Interfaz extends javax.swing.JFrame {
                 notificarCelular.isSelected());
         Listas.agregarCliente(c1);
         
+        Correo.setText("");
+        Celular.setText("");
+        SJ.setSelected(false);
+        Cartago.setSelected(false);
+        Alajuela.setSelected(false);
+        Heredia.setSelected(false);
+        Limon.setSelected(false);
+        Puntarenas.setSelected(false);
+        Guanacaste.setSelected(false);
+        OPacifico.setSelected(false);
+        MCaribe.setSelected(false);
+        notificarCorreo.setSelected(false);
+        notificarCelular.setSelected(false);
     }//GEN-LAST:event_RegistrarUsuarioActionPerformed
+
+    private void BorrarSismoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarSismoActionPerformed
+        String fecha = (String) FechaSismoExistente.getSelectedItem();
+        ArrayList<Sismo> listaSismos = Listas.getListaSismos();
+        for (Sismo sismo : listaSismos) 
+        {
+            if (sismo.getFecha2().compareTo(fecha)==0)
+            {
+               listaSismos.remove(sismo);       
+               break;
+            }
+        }
+        updateTablaPrincipal();
+        updateFechaSismoExistenteBox();
+        
+    }//GEN-LAST:event_BorrarSismoActionPerformed
+
+    private void GuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarCambiosActionPerformed
+        String fecha = (String) FechaSismoExistente.getSelectedItem();
+        ArrayList<Sismo> listaSismos = Listas.getListaSismos();
+        for (Sismo sismo : listaSismos) 
+        {
+            if (sismo.getFecha2().compareTo(fecha)==0)
+            {
+               sismo.setFecha(EditarFecha.getText());
+               sismo.setMagnitud(EditarMagnitud.getText());
+               sismo.setProfundidad(EditarProfundidad.getText());
+               sismo.setOrigen((Origen)EditarOrigen.getSelectedItem());
+               sismo.setProvincia((Provincia)EditarProvincia.getSelectedItem());
+               sismo.setDescripcion(EditarDescripción.getText());
+               sismo.setLatitud(EditarLatitud.getText());
+               sismo.setLongitud(EditarLongitud.getText());
+               break;
+            }
+        }
+        updateTablaPrincipal();
+        updateFechaSismoExistenteBox();
+    }//GEN-LAST:event_GuardarCambiosActionPerformed
+
+    private void GraficosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GraficosFocusGained
+        PieChart_AWT sismosTipoOrigen = new PieChart_AWT("Cantidad de sismos por tipo de origen");
+        jPanel9.removeAll();
+        jPanel9.add(sismosTipoOrigen.getContentPane());
+        
+        BarChart_AWT sismosProvincia = new BarChart_AWT("","Cantidad de sismos por tipo de origen");
+        jPanel11.removeAll();
+        jPanel11.add(sismosProvincia.getContentPane());
+    }//GEN-LAST:event_GraficosFocusGained
+
+    private void FechaSismoMapaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FechaSismoMapaItemStateChanged
+        updateSismosInfoMapa();
+    }//GEN-LAST:event_FechaSismoMapaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -531,7 +732,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField Celular;
     private javax.swing.JTextField Correo;
     private javax.swing.JTextArea Descripcion;
-    private javax.swing.JTextArea EditarDetalle;
+    private javax.swing.JLabel DescripcionMapa;
+    private javax.swing.JTextArea EditarDescripción;
     private javax.swing.JTextField EditarFecha;
     private javax.swing.JTextField EditarLatitud;
     private javax.swing.JTextField EditarLongitud;
@@ -540,25 +742,35 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField EditarProfundidad;
     private javax.swing.JComboBox EditarProvincia;
     private javax.swing.JTextField Fecha;
+    private javax.swing.JComboBox FechaSismoExistente;
+    private javax.swing.JComboBox FechaSismoMapa;
+    private javax.swing.JTabbedPane Graficos;
     private javax.swing.JCheckBox Guanacaste;
     private javax.swing.JButton GuardarCambios;
     private javax.swing.JCheckBox Heredia;
     private javax.swing.JTextField Latitud;
+    private javax.swing.JLabel LatitudMapa;
     private javax.swing.JCheckBox Limon;
     private javax.swing.JTextField Longitud;
+    private javax.swing.JLabel LongitudMapa;
     private javax.swing.JCheckBox MCaribe;
     private javax.swing.JTextField Magnitud;
+    private javax.swing.JLabel MagnitudMapa;
     private javax.swing.JTextField NombreUsuario;
     private javax.swing.JCheckBox OPacifico;
+    private javax.swing.JLabel OrigenMapa;
     private javax.swing.JComboBox OrigenSismo;
     private javax.swing.JTextField Profundidad;
+    private javax.swing.JLabel ProfundidadMapa;
+    private javax.swing.JLabel ProvinciaMapa;
     private javax.swing.JComboBox ProvinciaSismo;
     private javax.swing.JCheckBox Puntarenas;
     private javax.swing.JButton RegistrarSismo;
     private javax.swing.JButton RegistrarUsuario;
     private javax.swing.JCheckBox SJ;
     private javax.swing.JTable TablaSismos;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel ValorMagMapa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -573,7 +785,16 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -581,12 +802,20 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;

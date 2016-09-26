@@ -23,23 +23,12 @@ import java.text.SimpleDateFormat;
  *  <li>Longitud</li>
  * </ul>
  * @author Orlando José Hidalgo Ramírez - 2016106829
+ * @author Alejandro Tapia Barboza - 2016167784
+ * @author Francisco Loaiza Vallejos - 2016123417
  * @version 1.2
  */
 public class Sismo 
 {
-    /*private int dia;
-    private int mes;
-    private int año;
-    private int horas;
-    private int minutos;
-    private int segundos;
-    private Date fecha;
-    private float kilometros;
-    private Origen origen;
-    private float magnitud;
-    private Localizacion localizacion;
-    private String valorMagnitud;*/
-    
     private Date fecha;
     private String profundidad;
     private Origen origen;
@@ -49,19 +38,9 @@ public class Sismo
     private String descripcion;
     private Provincia provincia;
     private String valorMagnitud;
-    
-    /*public Sismo(int dia, int mes, int año, int horas, int minutos, int segundos, float kilometros, Origen origen, float magnitud, Localizacion localizacion, String valorMagnitud) {
-        setFecha(dia,mes,año,horas,minutos,segundos);
-        this.kilometros = kilometros;
-        this.origen = origen;
-        this.magnitud = magnitud;
-        this.localizacion = localizacion;
-        this.valorMagnitud = valorMagnitud;
-    }*/
-    
     /**
      * Metodo Constructor. Crea un objeto de la clase Sismo. 
-     * @param convertirFecha
+     * @param convertirFecha - En formato dd/MM/yyyy HH:mm:ss.
      * @param magnitud
      * @param profundidad
      * @param origen
@@ -132,6 +111,10 @@ public class Sismo
         {
           e.printStackTrace();
         }
+    }
+    public Date getFechaDate()
+    {
+        return fecha;
     }
     /**
      * Getter. Retorna la profundidad del sismo.

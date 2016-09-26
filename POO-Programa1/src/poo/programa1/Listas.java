@@ -6,10 +6,14 @@
 package poo.programa1;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
  * @author Orlando José Hidalgo Ramírez - 2016106829
+ * @author Alejandro Tapia Barboza - 2016167784
+ * @author Francisco Loaiza Vallejos - 2016123417
  */
 public class Listas 
 {
@@ -25,7 +29,7 @@ public class Listas
         return listaSismos;
     }
 
-    public ArrayList<Cliente> getListaClientes() 
+    public static ArrayList<Cliente> getListaClientes() 
     {
         return listaClientes;
     }
@@ -44,9 +48,53 @@ public class Listas
         int contador = 0;
         for (Sismo sismo : listaSismos) 
         {
-            fechas[contador] = sismo.getFecha2();
+            fechas[contador++] = sismo.getFecha2();
         }
         return fechas;
     }
     
+    public static int getCantidadSismos(Provincia provincia)
+    {
+        int contador = 0;
+        for (Sismo sismo : listaSismos) 
+        {
+            if (sismo.getProvincia().equals(provincia))
+                contador++;
+        }
+        return contador;
+    }
+    public static int getCantidadSismos(Origen origen)
+    {
+        int contador = 0;
+        for (Sismo sismo : listaSismos) 
+        {
+            if (sismo.getOrigen().equals(origen))
+                contador++;
+        }
+        return contador;
+    }
+    public static int getCantidadSismos(String valorMagnitud)
+    {
+        int contador = 0;
+        for (Sismo sismo : listaSismos) 
+        {
+            if (sismo.getValorMagnitud().compareTo(valorMagnitud)==0)
+                contador++;
+        }
+        return contador;
+    }
+    public static int getCantidadSismos(int mes)
+    {
+        int contador = 0;
+        for (Sismo sismo : listaSismos) 
+        {
+            Date fecha = sismo.getFechaDate();
+            Calendar calendario = Calendar.getInstance();
+            calendario.setTime(fecha);
+            int Mes = calendario.get(Calendar.MONTH);
+            if (Mes == mes)
+                contador++;
+        }
+        return contador;
+    }
 }

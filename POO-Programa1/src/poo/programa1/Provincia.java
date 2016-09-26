@@ -8,6 +8,8 @@ package poo.programa1;
 /**
  *
  * @author Orlando José Hidalgo Ramírez - 2016106829
+ * @author Alejandro Tapia Barboza - 2016167784
+ * @author Francisco Loaiza Vallejos - 2016123417
  */
 public enum Provincia 
 {
