@@ -8,6 +8,8 @@ package poo.programa1;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Desktop;
+import java.net.URI;
 
 /**
  *
@@ -54,6 +56,11 @@ public class Interfaz extends javax.swing.JFrame {
     {
         DefaultComboBoxModel model = new DefaultComboBoxModel(Listas.getFechas());
         FechaSismoExistente.setModel(model);
+    }
+    public void updateFechaSismoMapaBox()
+    {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(Listas.getFechas());
+        FechaSismoMapa.setModel(model);
     }
     public void updateSismosInfoMapa()
     {
@@ -590,6 +597,7 @@ public class Interfaz extends javax.swing.JFrame {
         Listas.agregarSismo(s1);
         updateTablaPrincipal();
         updateFechaSismoExistenteBox();
+        updateFechaSismoMapaBox();
     }//GEN-LAST:event_RegistrarSismoActionPerformed
 
     private void RegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarUsuarioActionPerformed
@@ -651,6 +659,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         updateTablaPrincipal();
         updateFechaSismoExistenteBox();
+        updateFechaSismoMapaBox();
         
     }//GEN-LAST:event_BorrarSismoActionPerformed
 
@@ -674,6 +683,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         updateTablaPrincipal();
         updateFechaSismoExistenteBox();
+        updateFechaSismoMapaBox();
     }//GEN-LAST:event_GuardarCambiosActionPerformed
 
     private void GraficosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GraficosFocusGained
@@ -689,6 +699,25 @@ public class Interfaz extends javax.swing.JFrame {
     private void FechaSismoMapaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FechaSismoMapaItemStateChanged
         updateSismosInfoMapa();
     }//GEN-LAST:event_FechaSismoMapaItemStateChanged
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+            String fecha = (String)FechaSismoMapa.getSelectedItem();
+        for (Sismo sismo : Listas.getListaSismos()) 
+        {
+            if (sismo.getFecha2().compareTo(fecha)==0)
+            {
+                String x=sismo.getLatitud();
+                String y=sismo.getLongitud();
+                String coordenada=x+"+"+y;
+
+                try {
+                Desktop.getDesktop().browse(new URI("http://www.google.com/maps/place/"+coordenada));
+                } catch (Exception e) {
+                }
+            }
+        }  
+    }
 
     /**
      * @param args the command line arguments
